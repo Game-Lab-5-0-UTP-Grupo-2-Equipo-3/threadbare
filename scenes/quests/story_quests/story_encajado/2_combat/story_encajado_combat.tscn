@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://cp54mgi54nywo" path="res://scenes/game_logic/fill_game_logic.gd" id="1_0nrgd"]
 [ext_resource type="Resource" uid="uid://du0tlihvb7eu1" path="res://scenes/quests/story_quests/story_encajado/2_combat/combat_components/story_encajado_combat.dialogue" id="2_g81wa"]
 [ext_resource type="TileSet" uid="uid://07fq3rspk8ia" path="res://scenes/tileset.tres" id="3_itnxt"]
-[ext_resource type="PackedScene" uid="uid://iu2q66clupc6" path="res://scenes/game_elements/characters/player/player.tscn" id="4_5bcvv"]
-[ext_resource type="SpriteFrames" uid="uid://276bapksbiki" path="res://scenes/quests/story_quests/story_encajado/player_components/story_encajado_player.tres" id="5_o8vgy"]
+[ext_resource type="PackedScene" uid="uid://bgm5qhfjr1u6f" path="res://scenes/quests/story_quests/story_encajado/player_components/player.tscn" id="4_ojhvb"]
+[ext_resource type="PackedScene" uid="uid://c3u5uwnooe34i" path="res://scenes/quests/story_quests/story_encajado/enemy_components/zombie.tscn" id="5_g81wa"]
 [ext_resource type="PackedScene" uid="uid://b82nsrh332syj" path="res://scenes/game_elements/characters/enemies/throwing_enemy/throwing_enemy.tscn" id="6_fulfx"]
 [ext_resource type="SpriteFrames" uid="uid://ce0qtgdltt4ov" path="res://scenes/quests/story_quests/story_encajado/2_combat/combat_components/story_encajado_throwing_enemy.tres" id="7_inm06"]
 [ext_resource type="SpriteFrames" uid="uid://g4sws0awlr3v" path="res://scenes/quests/story_quests/story_encajado/2_combat/combat_components/story_encajado_projectile_spriteframes.tres" id="8_vihav"]
@@ -34,60 +34,66 @@ tile_map_data = PackedByteArray("AAANAAcAAQABAAEAAAANAAYAAQABAAEAAAANAAUAAQABAAE
 tile_set = ExtResource("3_itnxt")
 
 [node name="Stones" type="TileMapLayer" parent="TileMapLayers"]
+visible = false
 tile_map_data = PackedByteArray("AAAGAAkABAABAAUAAAAHAAkABAABAAUAAAAIAAkABAABAAUAAAAJAAkABAABAAUAAAAKAAkABAABAAUAAAALAAkABAABAAUAAAAMAAkABAABAAUAAAANAAkABAABAAUAAAAOAAkABAABAAUAAAAGAAgABAABAAQAAAAHAAgABAABAAQAAAAIAAgABAABAAQAAAAJAAgABAABAAQAAAAKAAgABAABAAQAAAALAAgABAABAAQAAAAMAAgABAABAAQAAAANAAgABAABAAQAAAAOAAgABAABAAQAAAAAAAEABAACAAEAAAABAAEABAABAAMAAAACAAEABAABAAUAAAACAAAABAABAAQAAAABAAAABAABAAIAAAAAAAAABAABAAEAAAADAAAABAABAAIAAAAFAAAABAACAAIAAAAEAAAABAABAAEAAAAEAAEABAABAAMAAAAFAAEABAABAAUAAAADAAEABAABAAUAAAANAAcABAAAAAEAAAAOAAcABAABAAEAAAANAAYABAAAAAAAAAAOAAYABAABAAEAAAAOAAUABAAAAAEAAAAOAAMABAAAAAEAAAAOAAIABAABAAEAAAANAAEABAAAAAEAAAANAAAABAABAAAAAAAOAAAABAABAAAAAAAOAAEABAABAAEAAAAOAAQABAAAAAEAAAAMAAAABAABAAAAAAALAAAABAABAAAAAAAKAAAABAABAAAAAAAJAAAABAABAAAAAAAIAAAABAABAAAAAAAHAAAABAAAAAEAAAANAAIABAAAAAIAAAANAAMABAAAAAMAAAAHAAEABAABAAMAAAAIAAEABAABAAUAAAAKAAEABAABAAUAAAALAAEABAABAAUAAAAJAAEABAABAAMAAAAMAAEABAABAAMAAAAGAAAABAABAAIAAAAGAAEABAABAAMAAAAAAAkABAABAAUAAAABAAkABAABAAUAAAACAAkABAABAAUAAAADAAkABAABAAUAAAAEAAkABAABAAUAAAAFAAkABAABAAUAAAAAAAgABAABAAQAAAABAAgABAABAAQAAAACAAgABAABAAQAAAADAAgABAABAAQAAAAEAAgABAABAAQAAAAFAAgABAABAAQAAAAAAAIABAACAAEAAAAAAAMABAACAAEAAAAAAAQABAACAAEAAAAAAAcABAACAAEAAAAAAAYABAACAAEAAAAAAAUABAACAAEAAAA=")
 tile_set = ExtResource("3_itnxt")
 
 [node name="OnTheGround" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="Player" parent="OnTheGround" instance=ExtResource("4_5bcvv")]
-position = Vector2(348, 335)
-sprite_frames = ExtResource("5_o8vgy")
+[node name="Player" parent="OnTheGround" instance=ExtResource("4_ojhvb")]
+position = Vector2(392, 311)
+scale = Vector2(2, 2)
+knockbackPower = 500.0
 
-[node name="ThrowingNPC" parent="OnTheGround" instance=ExtResource("6_fulfx")]
-position = Vector2(857, 300)
-sprite_frames = ExtResource("7_inm06")
-projectile_sprite_frames = ExtResource("8_vihav")
+[node name="Zombie" parent="OnTheGround" groups=["guard_enemy"] instance=ExtResource("5_g81wa")]
+position = Vector2(217, 282)
 
 [node name="Target" parent="OnTheGround" instance=ExtResource("9_y8vpk")]
-position = Vector2(502, 164)
+position = Vector2(310, 141)
 sprite_frames = ExtResource("10_p2hqu")
 label = ""
 color = Color(1, 1, 1, 1)
 
 [node name="Target2" parent="OnTheGround" instance=ExtResource("9_y8vpk")]
-position = Vector2(758, 164)
+position = Vector2(566, 141)
 sprite_frames = ExtResource("10_p2hqu")
 label = ""
 color = Color(1, 1, 1, 1)
 
 [node name="Target3" parent="OnTheGround" instance=ExtResource("9_y8vpk")]
-position = Vector2(761, 497)
+position = Vector2(569, 474)
 sprite_frames = ExtResource("10_p2hqu")
 label = ""
 color = Color(1, 1, 1, 1)
 
 [node name="Target4" parent="OnTheGround" instance=ExtResource("9_y8vpk")]
-position = Vector2(632, 497)
+position = Vector2(440, 474)
 sprite_frames = ExtResource("10_p2hqu")
 label = ""
 color = Color(1, 1, 1, 1)
 
 [node name="Target5" parent="OnTheGround" instance=ExtResource("9_y8vpk")]
-position = Vector2(633, 164)
+position = Vector2(441, 141)
 sprite_frames = ExtResource("10_p2hqu")
 label = ""
 color = Color(1, 1, 1, 1)
 
 [node name="Target6" parent="OnTheGround" instance=ExtResource("9_y8vpk")]
-position = Vector2(501, 497)
+position = Vector2(309, 474)
 sprite_frames = ExtResource("10_p2hqu")
 label = ""
 color = Color(1, 1, 1, 1)
 
+[node name="ThrowingNPC" parent="OnTheGround" instance=ExtResource("6_fulfx")]
+visible = false
+position = Vector2(665, 277)
+sprite_frames = ExtResource("7_inm06")
+projectile_sprite_frames = ExtResource("8_vihav")
+
 [node name="CollectibleItem" parent="OnTheGround" instance=ExtResource("11_hc2ks")]
 unique_name_in_owner = true
-position = Vector2(868, 303)
+position = Vector2(676, 280)
 revealed = false
 next_scene = "uid://e0pxqct6ccjf"
 item = SubResource("Resource_smrww")

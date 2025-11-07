@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3u5uwnooe34i"]
+
+[ext_resource type="Script" uid="uid://brt462u6xuhey" path="res://scenes/quests/story_quests/story_encajado/enemy_components/zombie.gd" id="1_3h2xr"]
+[ext_resource type="SpriteFrames" uid="uid://ovu5wqo15s5g" path="res://scenes/quests/story_quests/NO_EDIT/1_NO_EDIT_stealth/NO_EDIT_stealth_components/NO_EDIT_guard_enemy.tres" id="2_rbg0e"]
+[ext_resource type="Script" uid="uid://dy68p7gf07pi3" path="res://scenes/game_logic/character_sprite_behavior.gd" id="3_pgteu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5ww6h"]
+radius = 9.0
+height = 36.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5wd85"]
+radius = 19.0
+height = 74.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ye73p"]
+radius = 39.0
+height = 86.0
+
+[node name="Zombie" type="CharacterBody2D"]
+script = ExtResource("1_3h2xr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -16)
+sprite_frames = ExtResource("2_rbg0e")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CharacterSpriteBehavior" type="Node2D" parent="AnimatedSprite2D" node_paths=PackedStringArray("character", "sprite")]
+script = ExtResource("3_pgteu")
+character = NodePath("../..")
+play_animations = false
+sprite = NodePath("..")
+metadata/_custom_type_script = "uid://dy68p7gf07pi3"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_5ww6h")
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 2048
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -16)
+shape = SubResource("CapsuleShape2D_5wd85")
+
+[node name="hitBox" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 65
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
+position = Vector2(0, -16)
+shape = SubResource("CapsuleShape2D_ye73p")
