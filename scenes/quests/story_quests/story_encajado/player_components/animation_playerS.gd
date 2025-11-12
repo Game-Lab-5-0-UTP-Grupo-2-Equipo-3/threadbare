@@ -1,0 +1,148 @@
+# SPDX-FileCopyrightText: The Threadbare Authors
+# SPDX-License-Identifier: MPL-2.0
+extends AnimationPlayer
+
+const REPEL_ANTICIPATION_TIME: float = 0.3
+
+@onready var player: Player = owner
+@onready var player_sprite: AnimatedSprite2D = %PlayerSprite
+@onready var player_fighting: Node2D = %PlayerFighting
+@onready var player_hook: Node2D = %PlayerHook
+@onready var original_speed_scale: float = speed_scale
+
+var last_suffix: String = ""
+var was_hurt := false
+var player_death := false
+
+func _ready() -> void:
+	player.mode_changed.connect(_on_player_mode_changed)
+	player_hook.string_thrown.connect(_on_player_hook_string_thrown)
+
+func _process(_delta: float) -> void:
+	match player.mode:
+		Player.Mode.COZY:
+			_process_walk_idle(_delta)
+		Player.Mode.FIGHTING:
+			_process_fighting(_delta)
+		Player.Mode.HOOKING:
+			_process_hooking(_delta)
+
+	# Double speed when running
+	var double_speed: bool = current_animation.begins_with("walk") and player.is_running()
+	speed_scale = original_speed_scale * (2.0 if double_speed else 1.0)
+
+# 🔹 Detects direction suffix ("_up", "_down", "")
+func _get_direction_suffix() -> String:
+	var dir := player.input_vector.normalized()
+
+	if dir.y < -0.5:
+		last_suffix = "_up"
+	elif dir.y > 0.5:
+		last_suffix = "_down"
+	elif abs(dir.x) > 0.5:
+		last_suffix = "" # side
+	# No input? keep last facing direction
+	return last_suffix
+
+
+# 🔹 Handles walking / idle / hurt logic
+func _process_walk_idle(_delta: float) -> void:
+	if player.isHurt:
+		_process_hurt()
+		return
+
+	var suffix := _get_direction_suffix()
+
+	if player.velocity.is_zero_approx():
+		var anim_name := "idle" + suffix
+		if has_animation(anim_name):
+			play(anim_name)
+		else:
+			play("idle")
+	else:
+		var anim_name := "walk" + suffix
+		if has_animation(anim_name):
+			play(anim_name)
+		else:
+			play("walk")
+
+func _process_hurt() -> void:
+	var suffix := _get_direction_suffix()
+
+	# 🔁 Reverse direction for hurt animation
+	match suffix:
+		"_up":
+			suffix = "_down"
+		"_down":
+			suffix = "_up"
+
+	var anim_name := "hurt" + suffix
+	if not has_animation(anim_name):
+		anim_name = "hurt"
+
+	# 🔸 Only play if not already playing
+	if current_animation != anim_name:
+		play(anim_name)
+	
+	was_hurt = true
+
+
+
+# 🔹 Handles death animations
+func _process_death(_delta: float) -> void:
+	if player_death:
+		return
+	player_death = true
+
+	var suffix := _get_direction_suffix()
+	var anim_name := "death" + suffix
+	if not has_animation(anim_name):
+		anim_name = "death"
+
+	play(anim_name)
+	var anim := get_animation(anim_name)
+	if anim:
+		anim.loop_mode = Animation.LOOP_NONE
+
+	player.velocity = Vector2.ZERO
+
+
+
+# 🔹 Handles fighting mode
+func _process_fighting(delta: float) -> void:
+	if player.isHurt:
+		_process_hurt()
+		return
+
+	var repel: StringName = _get_repel_animation()
+	if not player_fighting.is_fighting:
+		if not (current_animation == repel and current_animation_position > REPEL_ANTICIPATION_TIME):
+			_process_walk_idle(delta)
+		return
+
+	if current_animation != repel:
+		play(repel)
+		seek(REPEL_ANTICIPATION_TIME, false, false)
+
+# 🔹 Handles hooking animation
+func _process_hooking(delta: float) -> void:
+	if player.isHurt:
+		_process_hurt()
+		return
+	if current_animation == &"throw_string":
+		return
+	_process_walk_idle(delta)
+
+func _get_repel_animation() -> StringName:
+	return &"repel"
+
+# 🔹 When player mode changes to defeated
+func _on_player_mode_changed(mode: Player.Mode) -> void:
+	if mode == Player.Mode.DEFEATED:
+		_process_death(0.0)
+
+# 🔹 When grappling hook is thrown
+func _on_player_hook_string_thrown() -> void:
+	if current_animation == &"throw_string":
+		stop()
+	play(&"throw_string")

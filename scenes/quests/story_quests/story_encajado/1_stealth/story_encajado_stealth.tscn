@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://bgmwplmj3bfls" path="res://scenes/globals/game_state/inventory/inventory_item.gd" id="11_2wjxd"]
 [ext_resource type="Resource" uid="uid://3k1ukf8uedss" path="res://scenes/quests/story_quests/story_encajado/1_stealth/stealth_components/story_encajado_collected.dialogue" id="12_77drv"]
 [ext_resource type="Script" uid="uid://x1mxt6bmei2o" path="res://scenes/ui_elements/cinematic/cinematic.gd" id="13_wbscv"]
-[ext_resource type="PackedScene" uid="uid://bgm5qhfjr1u6f" path="res://scenes/quests/story_quests/story_encajado/player_components/player.tscn" id="14_7ndrh"]
+[ext_resource type="PackedScene" uid="uid://bgm5qhfjr1u6f" path="res://scenes/quests/story_quests/story_encajado/player_components/playerS.tscn" id="14_7ndrh"]
 [ext_resource type="Resource" uid="uid://2nf6yejmmrwl" path="res://scenes/quests/story_quests/story_encajado/1_stealth/stealth_components/story_encajado_stealth.dialogue" id="14_df3jj"]
 
 [sub_resource type="Curve2D" id="Curve2D_ym83x"]

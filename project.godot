@@ -80,6 +80,11 @@ projectiles=""
 guard_enemy=""
 sequence_object=""
 hook_listener=""
+hurtbox=""
+hitbox=""
+bullet=""
+Enemy=""
+enemy_bullet=""
 
 [input]
 
@@ -222,6 +227,11 @@ throw={
 , Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(92, 25),"global_position":Vector2(92, 54),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
+shoot={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
+}
 
 [layer_names]
 
@@ -238,6 +248,9 @@ throw={
 2d_physics/layer_11="hurtBox"
 2d_physics/layer_12="enemyHurtbox"
 2d_physics/layer_13="hookable"
+2d_physics/layer_14="PlayerProjectile"
+2d_physics/layer_15="enemy"
+2d_physics/layer_16="EnemyProjectile"
 
 [rendering]
 
