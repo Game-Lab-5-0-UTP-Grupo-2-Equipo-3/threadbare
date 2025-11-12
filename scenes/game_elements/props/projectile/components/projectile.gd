@@ -162,6 +162,12 @@ func _on_body_entered(body: Node2D) -> void:
 		if filling_barrel.label == label:
 			filling_barrel.increment()
 			queue_free()
+	if body is Guard:
+		var guard: Guard = body as Guard
+		# funcion morir
+		guard.die()
+		# borrar projectl
+		queue_free()
 
 
 func got_hit(player: Player) -> void:

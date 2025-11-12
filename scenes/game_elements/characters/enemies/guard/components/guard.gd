@@ -481,3 +481,7 @@ func _on_detection_area_body_exited(body: Node2D) -> void:
 	if state == State.DETECTING:
 		guard_movement.stop_moving()
 		state = State.INVESTIGATING
+
+func die() -> void:
+	# saca enemigo de escena
+	queue_free()

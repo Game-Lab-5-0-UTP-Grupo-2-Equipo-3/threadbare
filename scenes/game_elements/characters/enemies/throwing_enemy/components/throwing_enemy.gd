@@ -3,6 +3,9 @@
 @tool
 class_name ThrowingEnemy
 extends CharacterBody2D
+#declarar duracion init
+var duration: float = 0.0
+@onready var duration_timer: Timer = $DurationTimer
 ## Enemy that throws [Projectile]s to the player.
 ##
 ## @tutorial: https://github.com/endlessm/threadbare/discussions/1323
@@ -153,6 +156,10 @@ func _get_configuration_warnings() -> PackedStringArray:
 
 
 func _ready() -> void:
+	#agregar limite tiempo, declarado arrib
+	duration_timer.wait_time = duration
+	duration_timer.start()
+	
 	_initial_position = position
 	_set_sprite_frames(sprite_frames)
 	if Engine.is_editor_hint():

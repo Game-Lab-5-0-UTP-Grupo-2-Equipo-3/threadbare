@@ -3,7 +3,10 @@
 @tool
 class_name Player
 extends CharacterBody2D
-
+@export var projectile_scene: PackedScene
+@export var projectile_speed: float = 1000.0 # velocidad del proyectil
+@export var projectile_duration: float = 2.0 # tiempo de vida en segundos
+@export var projectile_sprite_frames: SpriteFrames #proyectil
 signal mode_changed(mode: Mode)
 
 ## Controls how the player can interact with the world around them.
@@ -181,6 +184,7 @@ func is_running() -> bool:
 
 
 func _process(delta: float) -> void:
+	
 	if Engine.is_editor_hint():
 		return
 
@@ -197,7 +201,11 @@ func _process(delta: float) -> void:
 	)
 	velocity = velocity.move_toward(input_vector, step * delta)
 
+	if Input.is_action_just_pressed("ui_accept"):
+		shoot_projectile()
+		
 	move_and_slide()
+
 
 
 func teleport_to(
@@ -223,3 +231,22 @@ func _set_walk_sound_stream(new_value: AudioStream) -> void:
 	if not is_node_ready():
 		await ready
 	_walk_sound.stream = walk_sound_stream
+
+
+func shoot_projectile() -> void:
+	# crear project
+	var projectile: Projectile = projectile_scene.instantiate()
+	
+	# asigna propiedades
+	projectile.sprite_frames = projectile_sprite_frames
+	projectile.speed = projectile_speed
+	projectile.duration = projectile_duration
+	
+	# defini posicion
+	projectile.global_position = $Muzzle.global_position
+	
+	# direccion mouse
+	projectile.direction = $Muzzle.global_position.direction_to(get_global_mouse_position())
+	
+	# añade al arbol
+	get_tree().current_scene.add_child(projectile)
