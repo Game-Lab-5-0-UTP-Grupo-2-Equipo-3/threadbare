@@ -5,7 +5,6 @@ class_name Player
 extends CharacterBody2D
 
 signal mode_changed(mode: Mode)
-signal healthChanged
 
 ## Controls how the player can interact with the world around them.
 enum Mode {
@@ -23,7 +22,7 @@ enum Mode {
 ## The animations which must be provided by [member sprite_frames], each with the corresponding
 ## number of frames.
 const REQUIRED_ANIMATION_FRAMES: Dictionary[StringName, int] = {
-	&"idle": 2,
+	&"idle": 10,
 	&"walk": 6,
 	&"attack_01": 4,
 	&"attack_02": 4,
@@ -68,16 +67,10 @@ const DEFAULT_SPRITE_FRAME: SpriteFrames = preload("uid://vwf8e1v8brdp")
 @export var sprite_frames: SpriteFrames = DEFAULT_SPRITE_FRAME:
 	set = _set_sprite_frames
 
-@export var knockbackPower: float = 300.00
-
-@export var maxHealth: int
-@onready var currentHealth: int = maxHealth
-
 @export_group("Sounds")
 ## Sound that plays for each step during the walk animation
 @export var walk_sound_stream: AudioStream = preload("uid://cx6jv2cflrmqu"):
 	set = _set_walk_sound_stream
-
 
 var input_vector: Vector2
 
@@ -86,9 +79,7 @@ var input_vector: Vector2
 @onready var player_hook: PlayerHook = %PlayerHook
 @onready var player_sprite: AnimatedSprite2D = %PlayerSprite
 @onready var _walk_sound: AudioStreamPlayer2D = %WalkSound
-@onready var hurtBox: Area2D = $HurtBox
 
-var isHurt: bool = false
 
 func _set_mode(new_mode: Mode) -> void:
 	var previous_mode: Mode = mode
@@ -131,6 +122,7 @@ func _toggle_player_behavior(behavior_node: Node2D, is_active: bool) -> void:
 	behavior_node.process_mode = (
 		ProcessMode.PROCESS_MODE_INHERIT if is_active else ProcessMode.PROCESS_MODE_DISABLED
 	)
+
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings: PackedStringArray
@@ -206,31 +198,6 @@ func _process(delta: float) -> void:
 	velocity = velocity.move_toward(input_vector, step * delta)
 
 	move_and_slide()
-
-	if !isHurt:
-		for area in hurtBox.get_overlapping_areas():
-			if area.name == "hitBox":
-				hurtByEnemy(area)
-
-func hurtByEnemy(area: Area2D) -> void:
-	currentHealth -= 10
-	print("💥 Daño recibido. Vida actual:", currentHealth)
-	if currentHealth <= 0:
-		currentHealth = 0
-		print("☠️ El jugador ha muerto")
-		mode = Mode.DEFEATED
-		
-	isHurt = true
-	healthChanged.emit()
-		
-	knockback(area.get_parent().velocity)
-	isHurt=false
-
-func knockback(enemyVelocity: Vector2) -> void:
-	var knockbackDirection: Vector2 = (enemyVelocity - velocity).normalized() * knockbackPower
-	velocity = knockbackDirection
-	move_and_slide()
-
 
 
 func teleport_to(

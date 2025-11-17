@@ -1,44 +1,43 @@
 extends ZombieBase
 class_name ZombieSpitter
 
-@export var spit_scene: PackedScene
-@export var spit_cooldown: float = 2.5
-var can_spit = true
+@export var Bullet: PackedScene
+@export var enemy: CharacterBody2D
+
+@onready var BulletManager = $BulletManager
+@onready var ShootSpeed = $ShootTimer
+
 
 func _ready():
-	move_speed = 100.0
-	max_health = 70
-	has_attack_animation = true
+	override_attack_logic = true
+	move_speed = 100
+	max_health = 30
+	uses_run_animation = false
+	player = get_tree().get_first_node_in_group("Player")
 	super._ready()
-	print("🧟‍♀️ Spitter zombie ready")
+	print("🏃 Spitter zombie ready")
 
-func _physics_process(delta):
-	super._physics_process(delta)
-	
-	# Only spit when not dead and within attack range
-	if player and can_spit and not dead:
-		var dist = global_position.distance_to(player.global_position)
-		if dist < 350:
-			await attack()  # Wait to not overlap spitting cycles
+func shoot() -> void:
+	print("the enemy shot!")
+	var bullet_instance = Bullet.instantiate()
+	get_tree().current_scene.add_child(bullet_instance)
 
-func attack() -> void:
-	if not can_spit or dead:
-		return
+	bullet_instance.global_position = BulletManager.global_position
 
-	can_spit = false
-	attacking = true
+	var target = player.global_position
+	var direction_to_player = (target - bullet_instance.global_position).normalized()
 
-	_play_animation("attack")
-	await sprite.animation_finished
+	bullet_instance.set_direction(direction_to_player)
+	bullet_instance.speed = 5
 
-	# Fire spit projectile
-	if spit_scene and player:
-		var spit = spit_scene.instantiate()
-		spit.global_position = global_position
-		spit.direction = (player.global_position - global_position).normalized()
-		get_parent().add_child(spit)
-		print("💦 Spitter fired projectile!")
+func _physics_process(delta: float) -> void:
+	var direction = player.global_position - enemy.global_position
 
-	attacking = false
-	await get_tree().create_timer(spit_cooldown).timeout
-	can_spit = true
+	if direction.length() < 300:
+		if ShootSpeed.is_stopped():
+			shoot()
+			ShootSpeed.wait_time = 0.5
+			ShootSpeed.start()
+
+	if direction.length() > 300:
+		enemy.velocity = direction.normalized() * move_speed

@@ -1,10 +1,10 @@
-[gd_resource type="SpriteFrames" load_steps=21 format=3 uid="uid://vwf8e1v8brdp"]
+[gd_resource type="SpriteFrames" load_steps=22 format=3 uid="uid://vwf8e1v8brdp"]
 
 [ext_resource type="Texture2D" uid="uid://c0itxt8w3yml0" path="res://scenes/quests/story_quests/NO_EDIT/NO_EDIT_player_components/NO_EDIT_player_attack_01.png" id="1_m5whc"]
 [ext_resource type="Texture2D" uid="uid://covbt3em3ppm1" path="res://scenes/quests/story_quests/NO_EDIT/NO_EDIT_player_components/NO_EDIT_player_attack_02.png" id="2_cu6lk"]
 [ext_resource type="Texture2D" uid="uid://dly3ikrx05f0x" path="res://scenes/quests/story_quests/NO_EDIT/NO_EDIT_player_components/NO_EDIT_player_defeated.png" id="2_qxir4"]
 [ext_resource type="Texture2D" uid="uid://bnb6fdjs7xeaa" path="res://scenes/quests/story_quests/NO_EDIT/NO_EDIT_player_components/NO_EDIT_player_walk.png" id="3_qxir4"]
-[ext_resource type="Texture2D" uid="uid://dgq45gmlvybi6" path="res://scenes/quests/story_quests/story_encajado/player_components/Pruebas/prototype_character_2.png" id="5_nocrf"]
+[ext_resource type="Texture2D" uid="uid://b0kexdddbmi7n" path="res://scenes/quests/story_quests/NO_EDIT/NO_EDIT_player_components/NO_EDIT_player_idle.png" id="4_hn2lb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yg72c"]
 atlas = ExtResource("1_m5whc")
@@ -46,13 +46,17 @@ region = Rect2(0, 0, 192, 192)
 atlas = ExtResource("2_qxir4")
 region = Rect2(192, 0, 192, 192)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_nocrf"]
+atlas = ExtResource("4_hn2lb")
+region = Rect2(0, 0, 192, 192)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_gbaev"]
-atlas = ExtResource("5_nocrf")
-region = Rect2(0, 0, 64, 64)
+atlas = ExtResource("4_hn2lb")
+region = Rect2(192, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kch1t"]
-atlas = ExtResource("5_nocrf")
-region = Rect2(64, 0, 64, 64)
+atlas = ExtResource("4_hn2lb")
+region = Rect2(384, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_28wor"]
 atlas = ExtResource("3_qxir4")
@@ -140,7 +144,44 @@ animations = [{
 "name": &"defeated",
 "speed": 5.0
 }, {
+"frames": [],
+"loop": true,
+"name": &"hurt",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"hurt_down",
+"speed": 5.0
+}, {
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nocrf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbaev")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kch1t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbaev")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nocrf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbaev")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kch1t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gbaev")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nocrf")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gbaev")
 }, {

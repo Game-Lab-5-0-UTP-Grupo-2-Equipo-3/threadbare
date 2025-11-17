@@ -5,6 +5,8 @@ extends Node2D
 @export var enemies_per_wave: Array[int] = [3, 5, 8, 12, 16]
 @export var time_between_spawns: float = 1.0
 @export var time_between_waves: float = 5.0
+@export var final_collectible: CollectibleItem
+@export var reward_spawn_point: Node2D
 
 # --- SPAWN POINTS ---
 @onready var spawn_points: Array[Node2D] = [
@@ -26,11 +28,16 @@ func _ready() -> void:
 		push_warning("⚠️ No zombie scenes assigned to EnemyManager!")
 	start_next_wave()
 
-
 # --- WAVE MANAGEMENT ---
 func start_next_wave() -> void:
 	if current_wave >= enemies_per_wave.size():
-		print("✅ All waves completed! 🎉")
+		print("🏁 All waves completed! Revealing final collectible...")
+
+		if final_collectible:
+			final_collectible.reveal()
+		else:
+			push_warning("⚠️ No final collectible assigned!")
+
 		return
 
 	current_wave += 1

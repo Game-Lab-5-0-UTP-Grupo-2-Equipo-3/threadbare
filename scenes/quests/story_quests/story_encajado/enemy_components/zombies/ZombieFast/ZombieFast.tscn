@@ -175,6 +175,7 @@ scale = Vector2(4, 4)
 collision_layer = 16384
 collision_mask = 17
 script = ExtResource("1_utmbt")
+detection_radius = 3000.0
 metadata/_custom_type_script = "uid://brt462u6xuhey"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

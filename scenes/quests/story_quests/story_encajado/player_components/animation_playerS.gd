@@ -5,7 +5,7 @@ extends AnimationPlayer
 const REPEL_ANTICIPATION_TIME: float = 0.3
 
 @onready var player: Player = owner
-@onready var player_sprite: AnimatedSprite2D = %PlayerSprite
+@onready var player_sprite: AnimatedSprite2D = %PlayerSSprite
 @onready var player_fighting: Node2D = %PlayerFighting
 @onready var player_hook: Node2D = %PlayerHook
 @onready var original_speed_scale: float = speed_scale

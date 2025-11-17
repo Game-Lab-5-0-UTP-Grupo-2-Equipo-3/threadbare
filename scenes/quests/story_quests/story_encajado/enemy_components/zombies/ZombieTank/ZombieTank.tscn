@@ -205,10 +205,11 @@ radius = 5.0
 height = 12.0
 
 [node name="ZombieTank" type="CharacterBody2D" groups=["Enemy"]]
-scale = Vector2(4, 4)
+scale = Vector2(8, 8)
 collision_layer = 16384
 collision_mask = 17
 script = ExtResource("1_6fwxh")
+detection_radius = 3000.0
 metadata/_custom_type_script = "uid://brt462u6xuhey"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

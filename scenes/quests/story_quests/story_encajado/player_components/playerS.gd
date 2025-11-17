@@ -5,7 +5,7 @@ extends "res://scenes/game_elements/characters/player/components/player.gd"
 class_name PlayerS
 
 signal healthChanged
-
+@onready var player_spriteS: AnimatedSprite2D = %PlayerSSprite
 
 ## The animations which must be provided by [member sprite_frames], each with the corresponding
 ## number of frames.
@@ -48,23 +48,25 @@ func _set_mode(new_mode: Mode) -> void:
 	mode = new_mode
 	if not is_node_ready():
 		return
-	match mode:
+	# ---- KEEP ORIGINAL BEHAVIOR ----
+	match new_mode:
 		Mode.COZY:
-			_toggle_player_behavior(player_interaction, true)
 			_toggle_player_behavior(player_fighting, false)
 			_toggle_player_behavior(player_hook, false)
 		Mode.FIGHTING:
-			_toggle_player_behavior(player_interaction, false)
 			_toggle_player_behavior(player_fighting, true)
 			_toggle_player_behavior(player_hook, false)
 		Mode.HOOKING:
-			_toggle_player_behavior(player_interaction, false)
 			_toggle_player_behavior(player_fighting, false)
 			_toggle_player_behavior(player_hook, true)
 		Mode.DEFEATED:
-			_toggle_player_behavior(player_interaction, false)
 			_toggle_player_behavior(player_fighting, false)
 			_toggle_player_behavior(player_hook, false)
+
+	# ---- BUT FORCE INTERACTION TO ALWAYS BE ACTIVE ----
+	player_interaction.visible = true
+	player_interaction.process_mode = ProcessMode.PROCESS_MODE_INHERIT
+		
 	if mode != previous_mode:
 		mode_changed.emit(mode)
 
@@ -75,12 +77,12 @@ func _set_sprite_frames(new_sprite_frames: SpriteFrames) -> void:
 		return
 	if new_sprite_frames == null:
 		new_sprite_frames = DEFAULT_SPRITE_FRAME
-	player_sprite.sprite_frames = new_sprite_frames
+	player_spriteS.sprite_frames = new_sprite_frames
 	update_configuration_warnings()
 
 
 func _toggle_player_behavior(behavior_node: Node2D, is_active: bool) -> void:
-	behavior_node.visible = is_active
+	# Do NOT hide the node — hiding breaks Area2D monitoring
 	behavior_node.process_mode = (
 		ProcessMode.PROCESS_MODE_INHERIT if is_active else ProcessMode.PROCESS_MODE_DISABLED
 	)
@@ -157,27 +159,52 @@ func _process(delta: float) -> void:
 
 	if !isHurt:
 		var overlapping_areas = hurtBox.get_overlapping_areas()
-		if overlapping_areas.size() > 0:
-			for area in overlapping_areas:
-				if area.name == "HitBox" or area.is_in_group("enemy_attack"):
-					hurtByEnemy(area)
+		for area in overlapping_areas:
+			if area.name == "HitBox":
+				hurt_by_melee(area)
+			elif area.is_in_group("enemy_bullet"):
+				hurt_by_bullet(area)
 	
 	if Input.is_action_pressed("shoot") and can_shoot:
 		shoot()
 
-
-func hurtByEnemy(area: Area2D) -> void:
+func hurt_by_melee(hitbox: Area2D) -> void:
 	currentHealth -= 10
-	print("💥 Daño recibido. Vida actual:", currentHealth)
+
+	isHurt = true
+	healthChanged.emit()
 
 	if currentHealth <= 0:
 		currentHealth = 0
 		print("☠️ El jugador ha muerto")
 		mode = Mode.DEFEATED
 
+	var parent_enemy = hitbox.get_parent()
+	if "velocity" in parent_enemy:
+		knockback(parent_enemy.velocity)
+	else:
+		knockback(Vector2.ZERO)
+
+	hurtTimer.start()
+	await hurtTimer.timeout
+	isHurt = false
+
+func hurt_by_bullet(bullet: Area2D) -> void:
+	currentHealth -= 10
+
 	isHurt = true
 	healthChanged.emit()
-	knockback(area.get_parent().velocity)
+
+	if currentHealth <= 0:
+		currentHealth = 0
+		print("☠️ El jugador ha muerto")
+		mode = Mode.DEFEATED
+
+	if "velocity" in bullet:
+		knockback(bullet.velocity)
+	else:
+		knockback(Vector2.ZERO)
+
 	hurtTimer.start()
 	await hurtTimer.timeout
 	isHurt = false
