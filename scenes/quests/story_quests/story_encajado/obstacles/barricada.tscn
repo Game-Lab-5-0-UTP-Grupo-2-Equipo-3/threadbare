@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cy07chi8np04m"]
+
+[ext_resource type="Texture2D" uid="uid://cyc435bfeof5v" path="res://scenes/quests/story_quests/story_encajado/art/Urban Assets/Zombie-Tileset---_0151_Capa-152.png" id="1_abaw4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_abaw4"]
+size = Vector2(16, 14)
+
+[node name="Barricada" type="StaticBody2D"]
+collision_layer = 16
+collision_mask = 16385
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_abaw4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_abaw4")

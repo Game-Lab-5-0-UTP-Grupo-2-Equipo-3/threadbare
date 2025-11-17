@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ciprrplhjyc3i"]
+
+[ext_resource type="Texture2D" uid="uid://dab5lkosg0mki" path="res://scenes/quests/story_quests/story_encajado/art/Broken Cars and Tires/Zombie-Tileset---_0180_Capa-181.png" id="1_r8bd1"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0ce06"]
+
+[node name="Car" type="StaticBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_0ce06")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_r8bd1")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-15, 6, -15, -5, -13, -7, -10, -5, -7, -8, -1, -8, 6, -7, 10, -5, 11, -2, 14, -2, 15, -1, 15, 8, -2, 8)
