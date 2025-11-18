@@ -4,9 +4,9 @@
 ~ start
 do animation_player.play(&"walk_on")
 do animation_player.animation_finished
-El brote lo cambió todo. En cuestión de días, el mundo cayó. 
-Ahora solo quedan unos pocos sobrevivientes luchando por mantener la esperanza. 
-Alex defiende el refugio, Lena gestiona los suministros y Eli explora las ruinas en busca de recursos.
+El brote lo cambió todo. En cuestión de días, el mundo cayó.
+Pero los luchadores no cayeron.
+Esta es la historia de Alex, y como protege la esperanza. 
 do animation_player.play(&"walk_off")
-Juntos intentan reconstruir un futuro entre los restos del pasado.
+En busqueda de un futuro entre los restos del pasado.
 => END
