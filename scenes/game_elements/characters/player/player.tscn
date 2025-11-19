@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bpu6jo4kvehlg" path="res://scenes/game_elements/characters/player/components/player_interaction.gd" id="3_dqkch"]
 [ext_resource type="Script" uid="uid://ciw2w16c38ewq" path="res://scenes/game_elements/characters/player/components/player_dust_particles.gd" id="3_j0tly"]
 [ext_resource type="Script" uid="uid://qro4uo83ba8f" path="res://scenes/game_elements/characters/player/components/player_sprite.gd" id="3_qlg0r"]
-[ext_resource type="SpriteFrames" uid="uid://276bapksbiki" path="res://scenes/quests/story_quests/story_encajado/player_components/story_encajado_player.tres" id="4_4nivu"]
+[ext_resource type="SpriteFrames" uid="uid://vwf8e1v8brdp" path="res://scenes/quests/story_quests/NO_EDIT/NO_EDIT_player_components/NO_EDIT_player.tres" id="4_4nivu"]
 [ext_resource type="Script" uid="uid://necvar42rnih" path="res://scenes/game_elements/characters/player/components/interact_zone.gd" id="6_3in67"]
 [ext_resource type="PackedScene" uid="uid://yfpfno276rol" path="res://scenes/game_elements/props/fixed_size_label/fixed_size_label.tscn" id="6_h17s1"]
 [ext_resource type="Script" uid="uid://e78f8iq448e1" path="res://scenes/game_elements/characters/player/components/animation_player.gd" id="7_0owmy"]
@@ -508,7 +508,6 @@ collision_mask = 531
 motion_mode = 1
 wall_min_slide_angle = 0.017453292
 script = ExtResource("1_g2els")
-maxHealth = 30
 
 [node name="HitBox" type="Area2D" parent="."]
 unique_name_in_owner = true

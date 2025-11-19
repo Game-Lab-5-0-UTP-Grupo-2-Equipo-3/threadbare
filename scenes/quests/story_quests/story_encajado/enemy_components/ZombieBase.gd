@@ -134,7 +134,7 @@ func _on_hurt_box_area_entered(area: Area2D) -> void:
 		return
 
 	if area.is_in_group("PlayerProjectile") or area.is_in_group("bullet"):
-		var dmg = 10
+		var dmg = 40
 		if area.has_method("get_damage"):
 			dmg = area.get_damage()
 

@@ -41,13 +41,13 @@ region = Rect2(48, 96, 16, 16)
 atlas = ExtResource("3_qlq4g")
 region = Rect2(64, 96, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_uwrw0"]
-atlas = ExtResource("5_hb6b4")
-region = Rect2(0, 80, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_gu8s3"]
 atlas = ExtResource("5_hb6b4")
 region = Rect2(16, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwrw0"]
+atlas = ExtResource("5_hb6b4")
+region = Rect2(0, 80, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eh4hb"]
 atlas = ExtResource("5_hb6b4")
@@ -134,10 +134,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_uwrw0")
+"texture": SubResource("AtlasTexture_gu8s3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gu8s3")
+"texture": SubResource("AtlasTexture_uwrw0")
 }],
 "loop": true,
 "name": &"hurt",
@@ -216,7 +216,7 @@ metadata/_custom_type_script = "uid://brt462u6xuhey"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6j6id")
-animation = &"attack"
+animation = &"hurt"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 6)

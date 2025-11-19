@@ -41,3 +41,4 @@ func _physics_process(delta: float) -> void:
 
 	if direction.length() > 300:
 		enemy.velocity = direction.normalized() * move_speed
+		move_and_slide()

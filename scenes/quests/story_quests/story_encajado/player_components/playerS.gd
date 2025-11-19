@@ -5,23 +5,17 @@ extends "res://scenes/game_elements/characters/player/components/player.gd"
 class_name PlayerS
 
 signal healthChanged
+signal shot_fired
 @onready var player_spriteS: AnimatedSprite2D = %PlayerSSprite
 
 ## The animations which must be provided by [member sprite_frames], each with the corresponding
 ## number of frames.
 const REQUIRED_ANIMATION_FRAMES_S: Dictionary[StringName, int] = {
-	&"idle": 2,
-	&"idle_up": 2,
-	&"idle_down": 2,
+	&"idle": 4,
 	&"walk": 4,
-	&"walk_up": 4,
-	&"walk_down": 4,
-	&"hurt_down": 2,
-	&"hurt_up": 2,
 	&"hurt": 2,
-	&"death":3,
-	&"death_up":3,
-	&"death_down":3,
+	&"death":5,
+	&"attack":4,
 }
 
 
@@ -228,6 +222,7 @@ func shoot():
 	
 	await get_tree().create_timer(shoot_cooldown).timeout
 	can_shoot = true
+	emit_signal("shot_fired")
  
 
 func teleport_to(

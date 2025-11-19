@@ -20,7 +20,7 @@ func update():
 	value = player.currentHealth * 100 / player.maxHealth
 	update_color()
 
-func update_color():
+func update_color() -> void:
 	var health_ratio = float(player.currentHealth) / float(player.maxHealth)
 	
 	if health_ratio > 0.6:
