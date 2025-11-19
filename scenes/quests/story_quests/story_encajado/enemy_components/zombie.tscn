@@ -28,13 +28,13 @@ region = Rect2(48, 0, 16, 16)
 atlas = ExtResource("2_ye73p")
 region = Rect2(64, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5ww6h"]
-atlas = ExtResource("2_rbg0e")
-region = Rect2(0, 0, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ye73p"]
 atlas = ExtResource("2_rbg0e")
 region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ww6h"]
+atlas = ExtResource("2_rbg0e")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5wd85"]
 atlas = ExtResource("3_pgteu")
@@ -104,10 +104,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5ww6h")
+"texture": SubResource("AtlasTexture_ye73p")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ye73p")
+"texture": SubResource("AtlasTexture_5ww6h")
 }],
 "loop": true,
 "name": &"hurt",
@@ -184,7 +184,7 @@ unique_name_in_owner = true
 position = Vector2(2, -17)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_bpsjh")
-animation = &"run"
+animation = &"hurt"
 autoplay = "idle"
 
 [node name="CharacterSpriteBehavior" type="Node2D" parent="AnimatedSprite2D" node_paths=PackedStringArray("character", "sprite")]
