@@ -2,8 +2,8 @@
 
 [ext_resource type="TileSet" uid="uid://07fq3rspk8ia" path="res://scenes/tileset.tres" id="1_djgxk"]
 [ext_resource type="Texture2D" uid="uid://c3l7lhhu5de88" path="res://assets/third_party/tiny-swords/Deco/16.png" id="2_a74g8"]
-[ext_resource type="SpriteFrames" uid="uid://276bapksbiki" path="res://scenes/quests/story_quests/story_encajado/player_components/story_encajado_player.tres" id="3_a74g8"]
 [ext_resource type="Texture2D" uid="uid://cgc2rawk3ekwc" path="res://assets/third_party/tiny-swords/Factions/Knights/Troops/Dead/Dead.png" id="3_sib8j"]
+[ext_resource type="SpriteFrames" uid="uid://da50w1c30c54t" path="res://scenes/quests/story_quests/story_encajado/player_components/playerS.tres" id="4_ef47q"]
 [ext_resource type="Texture2D" uid="uid://bmdu3gs8j1igu" path="res://assets/first_party/particles/circle.png" id="4_h1kka"]
 [ext_resource type="Script" uid="uid://x1mxt6bmei2o" path="res://scenes/ui_elements/cinematic/cinematic.gd" id="4_jsrbo"]
 [ext_resource type="Resource" uid="uid://d4l3acsehs8xj" path="res://scenes/quests/story_quests/story_encajado/0_intro/intro_components/story_encajado_intro.dialogue" id="5_sib8j"]
@@ -148,8 +148,8 @@ y_sort_enabled = true
 [node name="Character" type="AnimatedSprite2D" parent="OnTheGround"]
 z_index = 3
 position = Vector2(400, 349)
-scale = Vector2(1.4999999, 1.6702499)
-sprite_frames = ExtResource("3_a74g8")
+scale = Vector2(4.187501, 4.662782)
+sprite_frames = ExtResource("4_ef47q")
 animation = &"idle"
 autoplay = "idle"
 

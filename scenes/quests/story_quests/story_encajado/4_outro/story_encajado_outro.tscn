@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://cfcgrfvtn04yp" path="res://scenes/ui_elements/hud/hud.tscn" id="1_hni6v"]
 [ext_resource type="TileSet" uid="uid://07fq3rspk8ia" path="res://scenes/tileset.tres" id="2_t0pp4"]
 [ext_resource type="Texture2D" uid="uid://cnf47yhpue2aw" path="res://assets/third_party/tiny-swords/Factions/Knights/Buildings/House/House_Red.png" id="3_4g84d"]
-[ext_resource type="SpriteFrames" uid="uid://276bapksbiki" path="res://scenes/quests/story_quests/story_encajado/player_components/story_encajado_player.tres" id="3_cbkd1"]
 [ext_resource type="Script" uid="uid://x1mxt6bmei2o" path="res://scenes/ui_elements/cinematic/cinematic.gd" id="4_2444m"]
 [ext_resource type="Texture2D" uid="uid://7afi18x3x1dm" path="res://assets/third_party/tiny-swords/Deco/18.png" id="4_xtl6t"]
 [ext_resource type="Resource" uid="uid://dqjw7ssykl32d" path="res://scenes/quests/story_quests/story_encajado/4_outro/outro_components/story_encajado_outro.dialogue" id="5_4g84d"]
@@ -13,6 +12,7 @@
 [ext_resource type="SpriteFrames" uid="uid://d36eq8tqdaxdy" path="res://scenes/game_elements/props/tree/components/tree_spriteframes_green.tres" id="8_asvmf"]
 [ext_resource type="Texture2D" uid="uid://cngn8vxpim77v" path="res://assets/third_party/tiny-swords/Deco/02.png" id="8_mxiiv"]
 [ext_resource type="Texture2D" uid="uid://drfnq08l2wbgy" path="res://assets/third_party/tiny-swords/Deco/03.png" id="9_8m5oj"]
+[ext_resource type="SpriteFrames" uid="uid://da50w1c30c54t" path="res://scenes/quests/story_quests/story_encajado/player_components/playerS.tres" id="11_cbgnr"]
 [ext_resource type="Texture2D" uid="uid://bhqanyxhpxpm" path="res://assets/first_party/rocks/Rock_Idle.png" id="14_cbgnr"]
 [ext_resource type="Texture2D" uid="uid://ctwx8gghts62p" path="res://assets/third_party/tiny-swords/Deco/06.png" id="15_g7nuo"]
 [ext_resource type="Texture2D" uid="uid://b10hdfd5m5mj4" path="res://assets/third_party/tiny-swords/Deco/04.png" id="16_qjac1"]
@@ -113,7 +113,7 @@ texture = ExtResource("9_8m5oj")
 position = Vector2(586, 93)
 scale = Vector2(1.21875, 1.21875)
 sprite_frames = ExtResource("8_asvmf")
-frame = 3
+frame = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(153, 366)
@@ -129,8 +129,9 @@ editor_draw_limits = true
 y_sort_enabled = true
 
 [node name="Character" type="AnimatedSprite2D" parent="OnTheGround"]
-position = Vector2(400, 349)
-sprite_frames = ExtResource("3_cbkd1")
+position = Vector2(401.12503, 345.875)
+scale = Vector2(3.6093736, 3.6093736)
+sprite_frames = ExtResource("11_cbgnr")
 animation = &"idle"
 autoplay = "idle"
 

@@ -1,10 +1,14 @@
-[gd_resource type="Resource" script_class="Quest" load_steps=2 format=3 uid="uid://c27rxdcbwljoa"]
+[gd_resource type="Resource" script_class="Quest" load_steps=3 format=3 uid="uid://c27rxdcbwljoa"]
 
 [ext_resource type="Script" uid="uid://dts1hwdy3phin" path="res://scenes/menus/storybook/components/quest.gd" id="1_ahmd7"]
+[ext_resource type="SpriteFrames" uid="uid://da50w1c30c54t" path="res://scenes/quests/story_quests/story_encajado/player_components/playerS.tres" id="2_xv7i5"]
 
 [resource]
 script = ExtResource("1_ahmd7")
-title = "story_encajado"
-description = "Codename: Encajado"
+title = "La ultima batalla de Alex"
+description = "Alex sentia que no encajaba, y cuando el mundo que conocia cambio el no dejo de luchar.
+ Ahora enfrentará a su destino."
 first_scene = "uid://buhk242luewux"
+sprite_frames = ExtResource("2_xv7i5")
+animation_name = &"walk"
 metadata/_custom_type_script = "uid://dts1hwdy3phin"
