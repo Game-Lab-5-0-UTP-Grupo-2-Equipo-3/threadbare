@@ -144,12 +144,15 @@ scale = Vector2(0.107143, 0.352768)
 curve = SubResource("Curve2D_ym83x")
 
 [node name="Checkpoints" type="Node2D" parent="."]
+visible = false
 y_sort_enabled = true
 
 [node name="Checkpoint" parent="Checkpoints" instance=ExtResource("7_2lwfv")]
-visible = false
 position = Vector2(1704, 451)
 dialogue = ExtResource("8_2psl2")
+
+[node name="InteractArea" parent="Checkpoints/Checkpoint" index="2"]
+action = "Radio"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoints/Checkpoint"]
 position = Vector2(-105.9375, 26)
@@ -181,3 +184,5 @@ limit_left = 0
 limit_top = 0
 position_smoothing_enabled = true
 editor_draw_limits = true
+
+[editable path="Checkpoints/Checkpoint"]
