@@ -5,6 +5,9 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0ce06"]
 
 [node name="Car" type="StaticBody2D"]
+scale = Vector2(4, 4)
+collision_layer = 16
+collision_mask = 16385
 physics_material_override = SubResource("PhysicsMaterial_0ce06")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

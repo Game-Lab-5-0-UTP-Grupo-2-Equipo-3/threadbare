@@ -172,6 +172,13 @@ func hurt_by_melee(hitbox: Area2D) -> void:
 		currentHealth = 0
 		print("☠️ El jugador ha muerto")
 		mode = Mode.DEFEATED
+		
+		# Restart scene using the global SceneSwitcher
+		SceneSwitcher.reload_with_transition(
+			Transition.Effect.FADE,
+			Transition.Effect.FADE
+		)
+		return
 
 	var parent_enemy = hitbox.get_parent()
 	if "velocity" in parent_enemy:
@@ -193,6 +200,13 @@ func hurt_by_bullet(bullet: Area2D) -> void:
 		currentHealth = 0
 		print("☠️ El jugador ha muerto")
 		mode = Mode.DEFEATED
+		
+		# Restart scene using the global SceneSwitcher
+		SceneSwitcher.reload_with_transition(
+			Transition.Effect.FADE,
+			Transition.Effect.FADE
+		)
+		return
 
 	if "velocity" in bullet:
 		knockback(bullet.velocity)

@@ -77,3 +77,8 @@ func _on_barrel_completed() -> void:
 	if player:
 		player.mode = Player.Mode.COZY
 	goal_reached.emit()
+	
+func _on_player_detected(player: Player) -> void:
+	player.mode = Player.Mode.DEFEATED
+	await get_tree().create_timer(2.0).timeout
+	SceneSwitcher.reload_with_transition(Transition.Effect.FADE, Transition.Effect.FADE)
